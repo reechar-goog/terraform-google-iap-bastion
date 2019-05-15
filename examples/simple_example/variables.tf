@@ -19,7 +19,19 @@ variable "project_id" {
   type        = "string"
 }
 
-variable "bucket_name" {
-  description = "The name of the bucket to create."
-  type        = "string"
+variable "subnet" {
+  default = "default"
+}
+
+variable "network" {
+  default = "default"
+}
+
+variable "members" {
+  type = "list"
+  default = []
+}
+
+variable "zone"{
+  default = "us-central1-a"
 }

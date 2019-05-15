@@ -15,12 +15,17 @@
  */
 
 provider "google" {
-  version = "~> 2.0"
+    project  = "${var.project_id}"
+    zone = "${var.zone}"
 }
+
+provider "google-beta" {}
 
 module "iap_bastion" {
   source = "../.."
-
   project_id  = "${var.project_id}"
-  bucket_name = "${var.bucket_name}"
+  subnet = "${var.subnet}"
+  network = "${var.network}"
+  zone = "${var.zone}"
+  members = "${var.members}"
 }

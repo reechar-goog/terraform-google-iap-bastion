@@ -14,7 +14,3 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
-  description = "The name of the bucket."
-  value       = "${module.iap_bastion.bucket_name}"
-}
