@@ -7,13 +7,8 @@ The format is based on
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-## [0.1.0] - 20XX-YY-ZZ
-
-### Added
+## [0.1.0] - 2019-08-02
 
 - Initial release
 
-[Unreleased]: https://github.com/terraform-google-modules/terraform-google-iap-bastion/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/terraform-google-modules/terraform-google-iap-bastion/releases/tag/v0.1.0

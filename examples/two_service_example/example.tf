@@ -15,17 +15,17 @@
  */
 
 provider "google" {
-    project  = "${var.project_id}"
-    zone = "${var.zone}"
+  project = "${var.project_id}"
+  zone    = "${var.zone}"
 }
 
 provider "google-beta" {}
 
 module "iap_bastion" {
-  source = "../.."
-  project_id  = "${var.project_id}"
-  subnet = "${var.subnet}"
-  network = "${var.network}"
-  zone = "${var.zone}"
-  members = "${var.members}"
+  source     = "../.."
+  project_id = "${var.project_id}"
+  subnet     = "${var.subnet}"
+  network    = "${var.network}"
+  zone       = "${var.zone}"
+  members    = ["${var.user-a}", "${var.user-b}"]
 }

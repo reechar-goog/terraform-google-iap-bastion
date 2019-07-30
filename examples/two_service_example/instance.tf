@@ -9,18 +9,17 @@ resource "google_compute_instance" "priv_host_a_1" {
   }
 
   network_interface {
-    subnetwork = "central"
+    subnetwork = "${var.subnet}"
   }
 
   service_account {
-     email = "${google_service_account.service-a.email}"
-     scopes = ["cloud-platform"]
+    email  = "${google_service_account.service-a.email}"
+    scopes = ["cloud-platform"]
   }
 
   metadata = {
     enable-oslogin = "TRUE"
   }
-
 }
 
 resource "google_compute_instance" "priv_host_a_2" {
@@ -34,18 +33,17 @@ resource "google_compute_instance" "priv_host_a_2" {
   }
 
   network_interface {
-    subnetwork = "central"
+    subnetwork = "${var.subnet}"
   }
 
   service_account {
-     email = "${google_service_account.service-a.email}"
-     scopes = ["cloud-platform"]
+    email  = "${google_service_account.service-a.email}"
+    scopes = ["cloud-platform"]
   }
 
   metadata = {
     enable-oslogin = "TRUE"
   }
-
 }
 
 resource "google_compute_instance" "priv_host_b_1" {
@@ -59,16 +57,15 @@ resource "google_compute_instance" "priv_host_b_1" {
   }
 
   network_interface {
-    subnetwork = "central"
+    subnetwork = "${var.subnet}"
   }
 
   service_account {
-     email = "${google_service_account.service-b.email}"
-     scopes = ["cloud-platform"]
+    email  = "${google_service_account.service-b.email}"
+    scopes = ["cloud-platform"]
   }
 
   metadata = {
     enable-oslogin = "TRUE"
   }
-
 }

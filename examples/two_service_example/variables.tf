@@ -18,3 +18,19 @@ variable "project_id" {
   description = "The ID of the project in which to provision resources."
   type        = "string"
 }
+
+variable "subnet" {
+  default = "default"
+}
+
+variable "network" {
+  default = "default"
+}
+
+variable "zone" {
+  default = "us-central1-a"
+}
+
+variable "user-a" {}
+
+variable "user-b" {}

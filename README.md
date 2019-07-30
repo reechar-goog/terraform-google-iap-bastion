@@ -1,10 +1,20 @@
 # terraform-google-iap-bastion
 
-This module was generated from [terraform-google-module-template](https://github.com/terraform-google-modules/terraform-google-module-template/), which by default generates a module that simply creates a GCS bucket. As the module develops, this README should be updated.
+This module was generated from [terraform-google-module-template](https://github.com/terraform-google-modules/terraform-google-module-template/).
+
+This module will generate a bastion host vm compatible with os login and IAP tunneling that can be used to access internal VMs.
 
 The resources/services/activations/deletions that this module will create/trigger are:
 
-- Create a GCS bucket with the provided name
+- Creates a dedicated service account for the bastion host VM
+- Creates a GCE instance of n1-standard to be the bastion
+- Firewall to allow TCP:22 ssh access from the IAP to the bastion
+- Firewall to allow TCP:22 ssh acccess from the bastion to other instances on the network
+- IAM binding to allow members to utilize the IAP Tunnel
+- IAM binding granting os login to members through the bastion host
+- IAM binding granting the usage of the dedicated bastion host service account
+- Creates a custom role that has limited privileges to enable OS Login on an instance level
+- IAM binding to the custom role
 
 ## Usage
 
@@ -12,20 +22,17 @@ Basic usage of this module is as follows:
 
 ```hcl
 module "iap_bastion" {
-  source  = "terraform-google-modules/iap-bastion/google"
-  version = "~> 0.1"
-
+  source = "terraform-google-modules/terraform-google-iap-bastion/"
   project_id  = "<PROJECT ID>"
-  bucket_name = "gcs-test-bucket"
+  subnet = "<VPC_SUBNET>"
+  network = "<VPC_NETWORK>"
+  zone = "<ZONE>"
+  members = "<MEMBERS>"
 }
 ```
 
-Functional examples are included in the
+Functional example is included in the
 [examples](./examples/) directory.
-
-[^]: (autogen_docs_start)
-
-[^]: (autogen_docs_end)
 
 ## Requirements
 
@@ -38,23 +45,14 @@ The following dependencies must be available:
 - [Terraform][terraform] v0.11
 - [Terraform Provider for GCP][terraform-provider-gcp] plugin v2.0
 
-### Service Account
-
-A service account with the following roles must be used to provision
-the resources of this module:
-
-- Storage Admin: `roles/storage.admin`
-
-The [Project Factory module][project-factory-module] and the
-[IAM module][iam-module] may be used in combination to provision a
-service account with the necessary roles applied.
-
 ### APIs
 
 A project with the following APIs enabled must be used to host the
 resources of this module:
 
 - Google Cloud Storage JSON API: `storage-api.googleapis.com`
+- Compute Engine API: `compute.googleapis.com`
+- Cloud Identity-Aware Proxy API: `iap.googleapis.com`
 
 The [Project Factory module][project-factory-module] can be used to
 provision a project with the necessary APIs enabled.
