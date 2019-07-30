@@ -15,16 +15,27 @@ After this module is deployed, you can test ssh-ing to the private hosts by foll
 - `mv google_compute_engine google_compute_engine_backup_backup` backup private key
 
 3. Change project to sample project
-   `gcloud config set project <project-id>` change to project id that you used
+
+- `gcloud config set project <project-id>` change to project id that you used
+
 4. Generate new google compute engine keys and ssh over to bastion host
-   `gcloud compute ssh bastion-vm --zone=<zone you used>` zone defaults to us-central1-a
+
+- `gcloud compute ssh bastion-vm --zone=<zone you used>` zone defaults to us-central1-a
+
 5. Exit out from bastion
-   `exit` should return to local terminal
+
+- `exit` should return to local terminal
+
 6. Start SSH Agent
-   `eval "$(ssh-agent -s)"`
+
+- `eval "$(ssh-agent -s)"`
+
 7. Add SSH key to the ssh-agent
-   `ssh-add ~/.ssh/google_compute_engine`
+
+- `ssh-add ~/.ssh/google_compute_engine`
+
 8. SSH to private VM through bastion host
-   `gcloud compute ssh bastion-vm --zone=us-central1-a --ssh-flag="-A" --command "ssh priv-host-a-1" -- -t`
+
+- `gcloud compute ssh bastion-vm --zone=us-central1-a --ssh-flag="-A" --command "ssh priv-host-a-1" -- -t`
 
 9. Can also try sshing to the other host, priv-host-a-2. Should work. Try sshing to the B host, (priv-host-b-2) should fail. Try using user B, get another user to follow above steps. If you have access to a test account, you can use that as well, but make sure to backup the ssh keys from the steps above.
